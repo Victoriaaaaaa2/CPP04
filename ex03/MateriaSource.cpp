@@ -8,6 +8,18 @@ MateriaSource::MateriaSource()
 		this->materias[i] = NULL;
 }
 
+MateriaSource::MateriaSource(const MateriaSource & src)
+{
+	std::cout << "Character's copy constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		if (src.materias[i] != NULL)
+			this->materias[i] = src.materias[i]->clone();
+		else
+			this->materias[i] = NULL;
+	}
+}
+
 MateriaSource::~MateriaSource()
 {
 	std::cout << "MateriaSource's destructor called" << std::endl;

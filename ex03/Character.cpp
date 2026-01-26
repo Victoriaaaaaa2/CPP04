@@ -9,6 +9,19 @@ Character::Character(std::string name) : name(name)
 		this->inventory[i] = NULL;
 }
 
+Character::Character(const Character & src)
+{
+	std::cout << "Character's copy constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+	{
+		if (src.inventory[i] != NULL)
+			this->inventory[i] = src.inventory[i]->clone();
+		else
+			this->inventory[i] = NULL;
+	}
+	this->name = src.name;
+}
+
 Character::~Character()
 {
 	std::cout << "Character's destructor called" << std::endl;
@@ -37,7 +50,6 @@ Character &	Character::operator=(Character const & rhs)
 
 	return (*this);	
 }
-
 
 std::string	const & Character::getName() const
 {

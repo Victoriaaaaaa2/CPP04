@@ -8,6 +8,7 @@ class MateriaSource : public IMateriaSource
 {
 	public:
 		MateriaSource();
+		MateriaSource(const MateriaSource & src);
 		~MateriaSource();
 
 		MateriaSource &	operator=(MateriaSource const & rhs);
