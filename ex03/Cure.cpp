@@ -16,11 +16,11 @@ Cure::~Cure()
 	std::cout << "Cure's destructor called" << std::endl;
 }
 
-Cure &	Cure::operator=( Cure const & rhs )
+Cure &	Cure::operator=(Cure const & rhs)
 {
 	std::cout << "Cure's copy assignment operator called" << std::endl;
 
-	if ( this != &rhs )
+	if (this != &rhs)
 	{
 		this->type = rhs.type;
 	}

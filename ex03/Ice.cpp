@@ -16,11 +16,11 @@ Ice::~Ice()
 	std::cout << "Ice's destructor called" << std::endl;
 }
 
-Ice &	Ice::operator=( Ice const & rhs )
+Ice &	Ice::operator=(Ice const & rhs)
 {
 	std::cout << "Ice's copy assignment operator called" << std::endl;
 
-	if ( this != &rhs )
+	if (this != &rhs)
 	{
 		this->type = rhs.type;
 	}

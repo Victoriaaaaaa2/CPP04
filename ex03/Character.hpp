@@ -9,6 +9,9 @@ class Character : public ICharacter
 	public:
 		Character(std::string name);
 		virtual ~Character();
+
+		Character &	operator=(Character const & rhs);
+
 		virtual std::string const & getName() const;
 		virtual void equip(AMateria* m);
 		virtual void unequip(int idx);

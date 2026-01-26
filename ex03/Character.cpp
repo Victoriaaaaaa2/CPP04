@@ -22,6 +22,23 @@ Character::~Character()
 	}
 }
 
+Character &	Character::operator=(Character const & rhs)
+{
+	std::cout << "Character's copy assignment operator called" << std::endl;
+
+	if (this != &rhs)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			if (rhs.inventory[i] != NULL)
+				this->inventory[i] = rhs.inventory[i]->clone();
+		}
+	}
+
+	return (*this);	
+}
+
+
 std::string	const & Character::getName() const
 {
 	return this->name;

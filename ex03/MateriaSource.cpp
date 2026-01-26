@@ -18,6 +18,32 @@ MateriaSource::~MateriaSource()
 	}
 }
 
+MateriaSource &	MateriaSource::operator=(MateriaSource const & rhs)
+{
+	std::cout << "MateriaSource's copy assignment operator called" << std::endl;
+
+	if (this != &rhs)
+	{
+		int	i;
+		
+		for (i = 0; i < 4; i++)
+		{
+			if (rhs.materias[i] != NULL)
+			{
+				delete this->materias[i];
+				this->materias[i] = NULL;
+			}
+		}
+		for (i = 0; i < 4; i++)
+		{
+			if (rhs.materias[i] != NULL)
+				this->materias[i] = rhs.materias[i]->clone();
+		}
+	}
+
+	return (*this);
+}
+
 void MateriaSource::learnMateria(AMateria* materia)
 {
 	for (int i = 0; i < 4; i++)
@@ -39,5 +65,5 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 	else if (type == "cure")
 		return new Cure();
 	else
-		return NULL;
+		return 0;
 }
