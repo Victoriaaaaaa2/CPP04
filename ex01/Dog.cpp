@@ -8,14 +8,13 @@ Dog::Dog( void )
 	std::cout << "Dog's default constructor called" << std::endl;
 }
 
-Dog::Dog( const Dog & src )
+Dog::Dog( const Dog & src ) : Animal(src)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
 	if (src.brain != NULL)
 		this->brain = new Brain(*(src.brain));
 	else
 		this->brain = NULL;
-	this->type = src.type;
 }
 
 Dog::~Dog()
@@ -34,11 +33,12 @@ Dog &	Dog::operator=( Dog const & rhs )
 
 	if ( this != &rhs )
 	{
-		this->type = rhs.type;
-		if (rhs.brain != NULL)
-			this->brain = new Brain(*(rhs.brain));
-		else
-			this->brain = NULL;
+		this->Animal::operator=(rhs);
+		if (this->brain && rhs.brain) {
+			*(this->brain) = *(rhs.brain); // 已有脑子，复用
+		} else if (rhs.brain) {
+			this->brain = new Brain(*(rhs.brain)); // 没脑子，新建
+		}
 	}
 
 	return (*this);

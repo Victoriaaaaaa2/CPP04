@@ -9,10 +9,9 @@ AMateria::AMateria(std::string const & type)
 	this->type = type;
 }
 
-AMateria::AMateria(const AMateria & src)
+AMateria::AMateria(const AMateria & src) : type(src.type)
 {
 	std::cout << "AMateria's copy constructor called" << std::endl;
-	*this = src;
 }
 
 AMateria::~AMateria()

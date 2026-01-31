@@ -8,15 +8,20 @@ Dog::Dog( void )
 	std::cout << "Dog's default constructor called" << std::endl;
 }
 
-Dog::Dog( const Dog & src )
+Dog::Dog( const Dog & src ) : AAnimal(src)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
-	*this = src;
+
+	if (src.brain != NULL)
+		this->brain = new Brain(*(src.brain));
+	else
+		this->brain = NULL;
 }
 
 Dog::~Dog()
 {
 	std::cout << "Dog's destructor called" << std::endl;
+
 	if (brain != NULL)
 	{
 		delete brain;
@@ -30,7 +35,12 @@ Dog &	Dog::operator=( Dog const & rhs )
 
 	if ( this != &rhs )
 	{
-		this->type = rhs.type;
+		this->AAnimal::operator=(rhs);
+		if (this->brain && rhs.brain) {
+			*(this->brain) = *(rhs.brain); // 已有脑子，复用
+		} else if (rhs.brain) {
+			this->brain = new Brain(*(rhs.brain)); // 没脑子，新建
+		}
 	}
 
 	return (*this);

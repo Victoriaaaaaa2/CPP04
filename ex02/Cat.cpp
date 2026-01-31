@@ -8,15 +8,20 @@ Cat::Cat( void )
 	std::cout << "Cat's default constructor called" << std::endl;
 }
 
-Cat::Cat( const Cat & src )
+Cat::Cat( const Cat & src ) : AAnimal(src)
 {
 	std::cout << "Cat's copy constructor called" << std::endl;
-	*this = src;
+	
+	if (src.brain != NULL)
+		this->brain = new Brain(*(src.brain));
+	else
+		this->brain = NULL;
 }
 
 Cat::~Cat()
 {
 	std::cout << "Cat's destructor called" << std::endl;
+
 	if (brain != NULL)
 	{
 		delete brain;
@@ -30,7 +35,12 @@ Cat &	Cat::operator=( Cat const & rhs )
 
 	if ( this != &rhs )
 	{
-		this->type = rhs.type;
+		this->AAnimal::operator=(rhs);
+		if (this->brain && rhs.brain) {
+			*(this->brain) = *(rhs.brain); // 已有脑子，复用
+		} else if (rhs.brain) {
+			this->brain = new Brain(*(rhs.brain)); // 没脑子，新建
+		}
 	}
 
 	return (*this);

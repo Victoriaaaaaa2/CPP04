@@ -6,10 +6,9 @@ WrongAnimal::WrongAnimal( void ) : type("Default_type")
 	std::cout << "WrongAnimal's default constructor called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal( const WrongAnimal & src )
+WrongAnimal::WrongAnimal( const WrongAnimal & src ) : type(src.type)
 {
 	std::cout << "WrongAnimal's copy constructor called" << std::endl;
-	*this = src;
 }
 
 WrongAnimal::~WrongAnimal()
